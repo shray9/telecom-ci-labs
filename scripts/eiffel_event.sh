@@ -1,12 +1,15 @@
 #!/bin/bash
 
 EVENT_TYPE=$1
-EVENT_ID=$(uuidgen)
+EVENT_ID=$(cat /proc/sys/kernel/random/uuid)
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# Ensure directory exists (VERY IMPORTANT)
+mkdir -p eiffel/events
 
 EVENT_FILE="eiffel/events/${EVENT_TYPE}-${EVENT_ID}.json"
 
-cat <<EOF > $EVENT_FILE
+cat <<EOF > "$EVENT_FILE"
 {
   "meta": {
     "id": "${EVENT_ID}",
@@ -25,4 +28,3 @@ cat <<EOF > $EVENT_FILE
 EOF
 
 echo "✅ Eiffel Event Generated: $EVENT_FILE"
-
