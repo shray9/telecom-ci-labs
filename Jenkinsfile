@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'rhel9-build' }
+    agent { label 'docker-agent-1' }
 
     environment {
         EIFFEL_DIR = "eiffel/events"
